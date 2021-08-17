@@ -1,0 +1,30 @@
+version: "3.3"
+
+services:
+  portfolio-next:
+    image: portfolio-next
+    network_mode: "host"
+    ports:
+      - 3000:3000
+    build:
+      context: ./portfolio-next
+      dockerfile: Dockerfile
+    volumes:
+      - ./portfolio-next:/opt/app
+      - /opt/app/node_modules
+      - /opt/app/.next
+    env_file:
+      - ./portfolio-next/.env
+  portfolio-server:
+    image: portfolio-server
+    network_mode: "host"
+    ports:
+      - 4000:4000
+    build:
+      context: ./portfolio-server
+      dockerfile: Dockerfile
+    volumes:
+      - ./portfolio-server:/opt/app
+      - /opt/app/node_modules
+    env_file:
+      - ./portfolio-server/.env
